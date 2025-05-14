@@ -1,0 +1,56 @@
+{# Define the test data #}
+{% set my_tests = [
+    {
+        "id": 10,
+        "assay": {
+            "id": 3,
+            "title": "Assay #3",
+            "description": "This assay is used for frontend testing"
+        },
+        "sample": {
+            "id": 3,
+            "sample_name": "Tigger"
+        }
+    },
+    {
+        "id": 11,
+        "assay": {
+            "id": 14,
+            "title": "Assay #14",
+            "description": "Another cool assay for hello world"
+        },
+        "sample": {
+            "id": 4,
+            "sample_name": "Piglet"
+        }
+    },
+    {
+        "id": 14,
+        "assay": {
+            "id": 1,
+            "title": "Assay #1",
+            "description": "This assay is used for frontend testing"
+        },
+        "sample": {
+            "id": 3,
+            "sample_name": "Tigger"
+        }
+    },
+    {
+        "id": 9,
+        "assay": {
+            "id": 13,
+            "title": "Assay #13",
+            "description": "This assay is used for backend testing"
+        },
+        "sample": {
+            "id": 1,
+            "sample_name": "Steve"
+        }
+    }
+] %}
+
+{# Display sorted test data #}
+{% for test in my_tests|sort(attribute='sample.id')|sort(attribute='assay.id') %}
+    {{ test.id }} - {{ test.assay.title }} - {{ test.sample.id }}
+{% endfor %}

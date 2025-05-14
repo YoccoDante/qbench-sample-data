@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "sample-data-collection",
+		"name": "Data API Collection",
+		"description": "Collection for testing the Data API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Sample Data",
+			"item": [
+				{
+					"name": "Success - Get Sample Data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sample_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/api/data/sample",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"data",
+								"sample"
+							]
+						},
+						"description": "Successfully retrieve sample data by ID"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sample_id\": 1\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/api/data/sample",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"data",
+										"sample"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n    \"id\": 1,\n    \"content\": \"Sample content\",\n    \"created_at\": \"2024-03-21T10:00:00Z\",\n    \"updated_at\": null\n}"
+							}
+						}
+					]
+				},
+				{
+					"name": "Bad Request - Missing sample_id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/api/data/sample",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"data",
+								"sample"
+							]
+						},
+						"description": "Test case for missing sample_id in request body"
+					},
+					"response": [
+						{
+							"name": "Bad Request Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/api/data/sample",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"data",
+										"sample"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n    \"data\": null,\n    \"message\": \"No body or not sample_id in the request\",\n    \"status\": \"error\"\n}"
+							}
+						}
+					]
+				},
+				{
+					"name": "Not Found - Invalid sample_id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sample_id\": 99999\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/api/data/sample",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"data",
+								"sample"
+							]
+						},
+						"description": "Test case for non-existent sample_id"
+					},
+					"response": [
+						{
+							"name": "Not Found Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sample_id\": 99999\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/api/data/sample",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"data",
+										"sample"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n    \"data\": null,\n    \"message\": \"Sample data not found\",\n    \"status\": \"error\"\n}"
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000",
+			"type": "string",
+			"description": "Base URL for the API"
+		}
+	]
+}
